@@ -1,0 +1,20 @@
+function doGet(){
+  const html = HtmlService.createTemplateFromFile("index").evaluate();
+  return html;
+}
+function BuscarRegistros(frente="Mindtech (Lunes)"){
+  let registrosBuscados =[];
+
+  const SS=SpreadsheetApp.getActiveSpreadsheet();
+  const sheetEventos = SS.getSheetByName("Datos1");
+  const eventos = sheetEventos.getDataRange().getDisplayValues();
+
+
+  eventos.forEach(evento=>{
+    if(evento[1]=== frente){
+      registrosBuscados.push(evento);
+    }
+
+  })
+  return registrosBuscados;
+}
